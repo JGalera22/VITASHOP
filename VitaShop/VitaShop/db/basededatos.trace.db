@@ -1,0 +1,12 @@
+2020-10-16 14:17:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM USUARIO USUARIO ADMIN[*]"
+Syntax error in SQL statement "SELECT * FROM USUARIO USUARIO ADMIN[*]"; SQL statement:
+SELECT * FROM USUARIO USUARIO ADMIN [42000-200]
+2020-10-16 14:17:49 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "ADMIN[*]"; se esperaba "ALTER, ANALYZE"
+Syntax error in SQL statement "ADMIN[*]"; expected "ALTER, ANALYZE"; SQL statement:
+ADMIN [42001-200]
+2020-10-16 14:17:52 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "ADMIN[*] APELLIDOS"; se esperaba "ALTER, ANALYZE"
+Syntax error in SQL statement "ADMIN[*] APELLIDOS"; expected "ALTER, ANALYZE"; SQL statement:
+ADMIN APELLIDOS [42001-200]
