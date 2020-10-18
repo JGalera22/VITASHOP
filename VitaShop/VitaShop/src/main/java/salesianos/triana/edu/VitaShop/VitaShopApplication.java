@@ -39,9 +39,6 @@ public class VitaShopApplication {
 			a.setAccountNonLocked(true);
 
 			servicio.save(a);
-
-
 		};
 	}
-
 }
