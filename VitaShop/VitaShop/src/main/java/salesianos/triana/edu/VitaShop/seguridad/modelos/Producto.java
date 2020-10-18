@@ -1,5 +1,6 @@
 package salesianos.triana.edu.VitaShop.seguridad.modelos;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

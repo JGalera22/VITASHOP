@@ -14,13 +14,14 @@ public class AdminController {
 
     @GetMapping("/")
     public String index() {
-        return "administrador/index";
+        return "admin/index";
     }
 
-    @GetMapping("/info")
+
+    @GetMapping("/index")
     public String info(@AuthenticationPrincipal Usuario usuario, Model model) {
         model.addAttribute("nombre", usuario.getNombre() + " " + usuario.getApellidos());
-        return "administrador/info";
+        return "admin/index";
     }
 
 }
