@@ -25,3 +25,14 @@ public class AdminController {
     }
 
 }
+
+/*
+@Controller
+@RequestMapping("/admin/index")
+public class AdminController {
+
+    @GetMapping("/")
+    public String index() {
+        return "/admin/index";
+    }
+}*/
