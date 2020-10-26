@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 <head>
 
@@ -76,6 +77,30 @@
       </div>
     </div>
   </nav>
+
+
+  <!--
+  
+  <div class="sesion">
+      <li sec:authorize="isAnonymous()" class="nav-item">
+        <a class="nav-link" href="/login" th:href="@{/login}">Inicio Sesión/Registro</a>
+      </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user nav-link"></i><span th:text="${#authentication.getPrincipal().getNombre()}">Mi Cuenta</span>
+        </a>
+        <div class="dropdown-menu bg-info" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="/user/" th:href="@{/user/}">Mi Cuenta</a>
+        <span sec:authorize="hasRole('ROLE_ADMIN')">
+        <a class="dropdown-item" href="/admin/" th:href="@{/admin/}">Zona Privada</a>
+        </span>
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Salir</a>
+      </div>
+    </li>
+   </div>
+
+
+  -->
 
   <!-- Page Content -->
   <div class="container">

@@ -602,7 +602,7 @@
                 <div class="agileits-top">
                     <form th:action="@{/registro}" th:object="${usuario}" method="post">
                         <input class="text" type="text" th:field="*{nombre}" name="name" placeholder="name" required=""> <br><br>
-                        <input class="text" type="text" th:field="*{apellido}" name="lastname" placeholder="lastname" required="">
+                        <input class="text" type="text" th:field="*{apellidos}" name="lastname" placeholder="lastname" required="">
                         <input class="text email" type="email" th:field="*{email}" name="email" placeholder="Email" required="">
                         <input class="text" type="password" th:field="*{password}" name="password" placeholder="Password" required="">
                         <input class="text w3lpass" type="password" th:field="*{password}" name="password" placeholder="Confirm Password" required="">
