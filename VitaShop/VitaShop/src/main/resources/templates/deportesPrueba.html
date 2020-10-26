@@ -51,12 +51,21 @@
           padding: 0rem;
         }
 
+        #menuNavegacion{
+               width:50%;
+               margin-left: 7%;
+               float: left;
+
+        }
+        #menuNavegacionFondo{
+               width:170%;
+
+        }
+
   </style>
 
 </head>
-
-<body>
-
+<Body>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
@@ -96,11 +105,12 @@
         </div>
     </div>
 </nav>
+<!-- Body -->
 
 <!-- Page Content -->
-<div class="container">
+<div class="container"id="menuNavegacion">
 
-    <div class="row">
+    <div class="row" id="menuNavegacionFondo">
 
         <div class="col-lg-3">
 
@@ -111,8 +121,9 @@
             </div>
 
         </div>
+
         <!-- /.col-lg-3 -->
-        <!--
+
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
@@ -167,17 +178,10 @@
 
             </div>
         </div>
-        -->
-        <!-- /.col-lg-9 -->
 
-    </div>
-    <!-- /.row -->
 
-</div>
-<!-- /.container -->
 
-<!-- Footer -->
-<footer class="py-5 bg-dark" id="footer">
+<footer class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; VitaShop 2020</p>
     </div>
@@ -188,6 +192,41 @@
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</body>
 
+
+
+
+
+<!-- Footer -->
+        <!--
+<footer class="py-5 bg-dark" id="footer">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; VitaShop 2020</p>
+    </div>
+            -->
+    <!-- /.container -->
+
+        <!--
+</footer>
+        -->
+
+<!-- Bootstrap core JavaScript -->
+        <!--
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!--
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!--
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        -->
+
+
+
+</Body>
 </html>
