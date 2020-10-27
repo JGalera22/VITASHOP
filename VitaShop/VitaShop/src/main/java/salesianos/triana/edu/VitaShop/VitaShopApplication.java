@@ -29,7 +29,7 @@ public class VitaShopApplication {
 			u.setApellidos("López");
 			u.setEmail("luismi.lopez@email.com");
 			u.setPassword(passwordEncoder.encode("1234"));
-			u.setAccountNonLocked(false);
+			u.setAccountNonLocked(true);
 
 			servicio.save(u);
 
