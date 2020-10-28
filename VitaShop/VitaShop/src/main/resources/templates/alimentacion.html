@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -8,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Alimentacion</title>
+    <title>Alimentación</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -23,6 +24,7 @@
         * Copyright 2013-2020 Start Bootstrap
         * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
         */
+
         body {
         padding-top: 56px;
         background: #76b852;
@@ -30,54 +32,194 @@
 
         .navbar{
             background-color: #15926C;
+
         }
         #footer {
            position:fixed;
            left:0px;
            bottom:0px;
+           height:30px;
            width:100%;
+           background:#999;
         }
+        #cuenta{
+            background: #15926C;
+        }
+
+        .nav-link {
+          display: block;
+          padding: 0rem;
+        }
+
+        #izq{
+            width: 90%;
+
+        }
+
+        #drch{
+            padding-top: 50px;
+            width: 650px;
+        }
+
   </style>
+
 </head>
+
 <body>
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">VITASHOP</a>
+        <a class="navbar-brand" href="index">VITASHOP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="index" th:href="@{/index}">Home
                         <span class="fi-account-logout"></span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Usuario</a>
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user nav-link"></i><span th:text="${#authentication.getPrincipal().getNombre()}">Mi Cuenta</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="cuenta">
+                        <a class="dropdown-item" href="/user/" th:href="@{/user/}">Mi Cuenta</a>
+                        <span sec:authorize="hasRole('ROLE_ADMIN')">
+              <a class="dropdown-item" href="/admin/" th:href="@{/admin/}">Zona Privada</a>
+              </span>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Salir</a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Carrito</a>
+                    <a class="nav-link" href="carrito" th:href="@{/carrito}">Carrito</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tienda</a>
+                    <a class="nav-link" href="alimentacion" th:href="@{/alimentacion}">Tienda</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/login" th:href="@{/login}">Inicio Sesión/Registro</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
+<!-- Page Content -->
+<div class="container" id="izq">
+
+    <div class="row" >
+
+        <div class="col-lg-3">
+
+            <h1 class="my-4">CATEGORÍAS</h1>
+            <div class="list-group">
+                <a href="alimentacion" th:href="@{/alimentacion}"  class="list-group-item">Alimentación</a>
+                <a href="deportes" th:href="@{/deportes}" class="list-group-item" >Deporte</a>
+            </div>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="container" id="drch">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-12">
+                    <div class="pull-right">
+                        <span sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#añadir-modal">Nuevo Producto</button>
+                        </span>
+                        <br>
+
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Estado</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="categoria : ${categorias}">
+                            <td><img
+                                    th:src="${not (#strings.isEmpty(categoria.imagen))} ? ${categoria.imagen} : 'http://placehold.it/48x48'"
+                                    class="img-responsive icono-categoria" alt="imagen" /></td>
+                            <!-
+                            <td th:text="${categoria.estado}"></td>
+                            <td th:text="${categoria.nombre}"></td>
+                            <td th:text="${categoria.precio}"></td>
+                            <td class="operaciones">
+                                <span sec:authorize="hasRole('ROLE_ADMIN')">
+                                     <button type="button" class="btn btn-primary" data-toggle="modal"
+                                             data-target="#editar-modal">Editar</button>
+                                </span>
+
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#delete-modal">Borrar</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Borrar producto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Está usted seguro de borrar este producto?</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <a href="#" class="btn btn-danger">Sí</a>
+                    </div>
+                </div>
 
+            </div>
+        </div>
 
+        <div class="modal fade" id="añadir-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Añadir producto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/alimentacion}" th:object="${producto}" method="post">
+                            <input class="text" type="text" th:field="*{estado}" name="name" placeholder="Estado" required=""> <br><br>
+                            <input class="text" type="text" th:field="*{nombre}" name="name" placeholder="Nombre" required=""> <br><br>
+                            <input class="text" type="text" th:field="*{precio}" name="name" placeholder="Precio" required=""> <br><br>
+                        </form>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Sí</button>
+                    </div>
+                </div>
 
+            </div>
+        </div>
 
+        <!-- /.col-lg-9 -->
 
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
 
 <!-- Footer -->
 <footer class="py-5 bg-dark" id="footer">
@@ -92,4 +234,5 @@
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

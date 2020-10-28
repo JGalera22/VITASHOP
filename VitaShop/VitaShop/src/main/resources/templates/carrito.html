@@ -49,6 +49,10 @@
           display: block;
           padding: 0rem;
         }
+
+        #carrito{
+          padding-left: 35%;
+        }
   </style>
 
 </head>
@@ -92,7 +96,7 @@
         </div>
     </div>
 </nav>
-
+<div id="carrito">
     <h1>Productos en carrito</h1>
     <p>Nº de productos en carrito <span th:text="${numProductosDiferentes}"></span></p>
     <p>Nº de unidades en carrito <span th:text="${numUnidades}"></span></p>
@@ -101,7 +105,7 @@
         <tr>
             <th>Unidades</th>
             <th>Nombre</th>
-            <th>Precio unitario</th>
+            <th>Precio</th>
             <th>Subtotal</th>
             <th>Operaciones</th>
         </thead>
@@ -116,9 +120,9 @@
         </tbody>
     </table>
     <p>Importe total de los productos <span th:text="${#numbers.formatCurrency(importeTotal)}"></span></p>
-    <p><a th:href="@{/}">Seguir comprando</a> | <a th:href="@{/carrito/clear}">Vaciar carrito</a></p>
+    <p><a th:href="@{index}">Seguir comprando</a> | <a th:href="@{/carrito/clear}">Vaciar carrito</a></p>
     <p><a th:href="@{/carrito/process}">FINALIZAR COMPRA</a></p>
-
+</div>
 <!-- Footer -->
 <footer class="py-5 bg-dark" id="footer">
     <div class="container">
