@@ -1,72 +1,104 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-<title>SecondHandMarket</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-<link rel="stylesheet" href="../../../static/css/styles.css"
-	th:href="@{/css/styles.css}">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Lista</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="../../../static/css/styles.css"
+		  th:href="@{/css/styles.css}">
+
+
+	<style>
+
+
+        body {
+        padding-top: 56px;
+        background: #76b852;
+        }
+
+        .navbar{
+            background-color: #15926C;
+
+        }
+        #footer {
+           position:fixed;
+           left:0px;
+           bottom:0px;
+           height:30px;
+           width:100%;
+           background:#999;
+        }
+        #cuenta{
+            background: #15926C;
+        }
+
+        .nav-link {
+          display: block;
+          padding: 0rem;
+        }
+
+  </style>
 
 </head>
+
 <body>
 
-	<div class="jumbotron">
-		<div class="container text-center">
-			<h1>Second-Hand-Market</h1>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="index">VITASHOP</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="index" th:href="@{/index}">Home
+						<span class="fi-account-logout"></span>
+					</a>
+				</li>
+				<li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-user nav-link"></i><span th:text="${#authentication.getPrincipal().getNombre()}">Mi Cuenta</span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown" id="cuenta">
+						<a class="dropdown-item" href="/user/" th:href="@{/user/}">Mi Cuenta</a>
+						<span sec:authorize="hasRole('ROLE_ADMIN')">
+              <a class="dropdown-item" href="/admin/" th:href="@{/administracion/}">Zona Privada</a>
+              </span>
+						<a th:href="@{logout}" class="dropdown-item">Salir</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="carrito" th:href="@{/app/carrito}">Carrito</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="listado" th:href="@{/app/listado}">Mis pedidos</a>
+				</li>
+				<li sec:authorize="isAnonymous()" class="nav-item">
+					<a class="nav-link" href="/login" th:href="@{/login}">Inicio Sesión/Registro</a>
+				</li>
+			</ul>
 		</div>
 	</div>
-
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" th:href="@{/}">SHM</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li><a th:href="@{/}">Inicio</a></li>
-					<li class="active" sec:authorize="isAuthenticated()"><a
-						th:href="@{/app/misproductos}">Mis Productos</a></li>
-					<li sec:authorize="isAuthenticated()"><a
-						th:href="@{/app/miscompras}">Mis Compras</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li sec:authorize="isAuthenticated()"><a
-						th:href="@{/app/carrito}"><span
-							class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
-					<li sec:authorize="!isAuthenticated()"><a
-						th:href="@{/auth/login}"><span
-							class="glyphicon glyphicon-user"></span> Login</a></li>
-					<li sec:authorize="isAuthenticated()" class="dropdown"><a
-						href="#" class="dropdown-toggle" data-toggle="dropdown"
-						role="button" aria-haspopup="true" aria-expanded="false"> <span
-							th:text="${#authentication.name}">Menú</span> <span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="javascript:document.getElementById('logoutForm').submit()">Salir</a>
-							</li>
-						</ul></li>
-				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Buscar..."
-						name="q" th:value="${param.q}">
-				</form>
-			</div>
-		</div>
-	</nav>
-	<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
+</nav>
 
 
-	<div class="container">
+
+
+<div class="container">
 		<div class="row">
 			<div class="col-md-offset-10 col-md-2" style="margin-bottom: 20px;">
 				<a th:href="@{/app/producto/nuevo}" class="btn btn-lg btn-info">Nuevo producto</a>
@@ -137,6 +169,16 @@
 	</div>
 
 
+<!-- Footer -->
+<br><br><br><br>
+<footer class="py-5 bg-dark" id="footer">
+	<div class="container">
+		<p class="m-0 text-center text-white">Copyright &copy; VitaShop 2020</p>
+	</div>
+	<!-- /.container -->
+</footer>
+
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
 		th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -159,8 +201,10 @@
 			});
 		});
 	</script>
-
-
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

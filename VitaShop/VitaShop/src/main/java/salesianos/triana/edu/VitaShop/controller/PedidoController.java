@@ -124,7 +124,7 @@ public class PedidoController {
         Pedido pe = pedidoServicio.buscarPorId(id);
         List<Producto> productos = productoServicio.productosDeUnPedido(pe);
         model.addAttribute("productos", productos);
-        model.addAttribute("compra", pe);
+        model.addAttribute("pedido", pe);
         model.addAttribute("total_compra", productos.stream().mapToDouble(p -> p.getPrecio()).sum());
         return "/app/compra/factura";
     }
@@ -134,6 +134,11 @@ public class PedidoController {
     @GetMapping("/form")
     public String verForm(Model model) {
         return "app/producto/form";
+    }
+
+    @GetMapping("/listado")
+    public String verListado(Model model) {
+        return "app/compra/listado";
     }
 
 

@@ -4,20 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Pedido {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate fecha;
@@ -40,21 +38,10 @@ public class Pedido {
         this.propietario = propietario;
     }
 
-    public Pedido() {}
-
 
     public Pedido(Usuario propietario) {
         this.propietario = propietario;
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
 
     public Usuario getPropietario() {
         return propietario;

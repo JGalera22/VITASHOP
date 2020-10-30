@@ -15,15 +15,10 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
   
 
   <style>
-            /*!
-        * Start Bootstrap - Shop Homepage (https://startbootstrap.com/templates/shop-homepage)
-        * Copyright 2013-2020 Start Bootstrap
-        * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
-        */
+
 
         body {
         padding-top: 56px;
@@ -78,16 +73,16 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="cuenta">
               <a class="dropdown-item" href="/user/" th:href="@{/user/}">Mi Cuenta</a>
               <span sec:authorize="hasRole('ROLE_ADMIN')">
-              <a class="dropdown-item" href="/admin/" th:href="@{/admin/}">Zona Privada</a>
+              <a class="dropdown-item" href="/administracion/" th:href="@{/administracion/}">Zona Privada</a>
               </span>
-              <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Salir</a>
+              <a th:href="@{logout}" class="dropdown-item">Salir</a>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="carrito" th:href="@{/carrito}">Carrito</a>
+            <a class="nav-link" href="carrito" th:href="@{/app/carrito}">Carrito</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="alimentacion" th:href="@{/alimentacion}">Tienda</a>
+            <a class="nav-link" href="listado" th:href="@{/app/listado}">Mis pedidos</a>
           </li>
           <li sec:authorize="isAnonymous()" class="nav-item">
             <a class="nav-link" href="/login" th:href="@{/login}">Inicio Sesión/Registro</a>
@@ -98,28 +93,6 @@
   </nav>
 
 
-  <!--
-  
-  <div class="sesion">
-      <li sec:authorize="isAnonymous()" class="nav-item">
-        <a class="nav-link" href="/login" th:href="@{/login}">Inicio Sesión/Registro</a>
-      </li>
-        <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-user nav-link"></i><span th:text="${#authentication.getPrincipal().getNombre()}">Mi Cuenta</span>
-        </a>
-        <div class="dropdown-menu bg-info" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="/user/" th:href="@{/user/}">Mi Cuenta</a>
-        <span sec:authorize="hasRole('ROLE_ADMIN')">
-        <a class="dropdown-item" href="/admin/" th:href="@{/admin/}">Zona Privada</a>
-        </span>
-        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Salir</a>
-      </div>
-    </li>
-   </div>
-
-
-  -->
 
   <!-- Page Content -->
   <div class="container">

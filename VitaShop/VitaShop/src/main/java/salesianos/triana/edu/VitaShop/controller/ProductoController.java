@@ -88,14 +88,25 @@ public class ProductoController {
     @GetMapping("/producto/nuevo")
     public String nuevoProductoForm(Model model) {
         model.addAttribute("producto", new Producto());
+        model.addAttribute("categorias", categoriaServicio.findAll());
         return "app/producto/form";
     }
 
+
+
+
     @PostMapping("/producto/nuevo/submit")
-    public String nuevoProductoSubmit(@ModelAttribute Producto producto) {
-        producto.setPropietario(usuario);
-        productoServicio.insertar(producto);
-        return "redirect:/app/misproductos";
+    public String nuevoProductoSubmit(@ModelAttribute Producto p) {
+        p.setPropietario(usuario);
+        if (p.getCategoria().equals(categoriaServicio.buscarPorNombre("alimentacion"))){
+            productoServicio.insertar(p);;
+            return "redirect:/alimentacion";
+        } else if (p.getCategoria().equals(categoriaServicio.buscarPorNombre("deportes"))){
+            productoServicio.insertar(p);;
+            return "redirect:/deportes";
+        } else{
+            return "redirect:/index";
+        }
     }
 
 

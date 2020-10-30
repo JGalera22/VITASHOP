@@ -215,3 +215,30 @@
             border-top: 2px solid;
         }
 
+        /*Resto código*/
+        body {
+            padding-top: 56px;
+            background: #76b852;
+        }
+
+        .navbar{
+            background-color: #15926C;
+
+        }
+        #footer {
+           position:fixed;
+           left:0px;
+           bottom:0px;
+           height:30px;
+           width:100%;
+           background:#999;
+        }
+        #cuenta{
+            background: #15926C;
+        }
+
+        .nav-link {
+          display: block;
+          padding: 0rem;
+        }
+

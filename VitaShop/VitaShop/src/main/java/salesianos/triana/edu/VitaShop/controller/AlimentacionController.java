@@ -32,19 +32,7 @@ public class AlimentacionController {
         return "alimentacion";
     }
 
-    /*
-    @GetMapping("/producto/nuevo")
-    public String nuevoProducto(Model model) {
-        model.addAttribute("producto", new Producto());
-        return "app/producto/lista";
-    }
 
-    @PostMapping("/producto/nuevo/submit")
-    public String nuevoProductoSubmit(@ModelAttribute("producto") Producto producto) {
-        producto.setPropietario(usuario);
-        productoServicio.insertar(producto);
-        return "redirect:/app/misproductos";
-    }*/
 
 
 }

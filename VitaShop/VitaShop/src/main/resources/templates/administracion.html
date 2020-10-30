@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User</title>
+    <title>Administración</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -95,53 +95,14 @@
 </nav>
 
 
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well well-sm">
-                <form class="form-horizontal" method="post">
-                    <fieldset>
-                        <legend class="text-center header">
-                            <span th:text="${nombre}">Usuario</span>
-                        </legend>
-
-                        <div class="col-md-8">
-                            <div class="row">
-                                <h3>Contraseña nueva</h3><br>
-                                <form class="form-signin" method="POST" action="cambiarPass" th:action="@{/user/cambiarPass/submit}" th:object="${usuario}">
-                                    <!--<div class="form-label-group">
-                                        <input type="password" th:field="*{password}" name="passwordActual" id="passwordActual" class="form-control" placeholder="Contraseña Actual" required>
-
-                                    </div>
-
-                                    <div class="form-label-group">
-                                        <input type="password" th:field="*{password}" name="passwordNueva" id="passwordNueva" class="form-control" placeholder="Contraseña Nueva" required>
-
-                                    </div>-->
-                                    <button class="btn btn-lg btn-block text-uppercase" id="botonLogin" type="submit">Guardar</button>
-                                    <hr class="my-4">
-
-                                </form>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
+<br><br><br><br>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>!Disculpe! Actualmente se encuentra en mantenimiento</h1>
     </div>
 </div>
 
-
-
-
-
-
-
-
 <!-- Footer -->
-<br><br><br><br>
 <footer class="py-5 bg-dark" id="footer">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; VitaShop 2020</p>
