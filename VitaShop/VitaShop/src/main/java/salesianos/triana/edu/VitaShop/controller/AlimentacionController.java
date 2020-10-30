@@ -17,7 +17,6 @@ import salesianos.triana.edu.VitaShop.servicios.UsuarioServicio;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/alimentacion")
 public class AlimentacionController {
 
     private Usuario usuario;
@@ -25,11 +24,15 @@ public class AlimentacionController {
     @Autowired
     ProductoServicio productoServicio;
 
-    @GetMapping("/")
-    public String alimentacion() {
+    @GetMapping("/alimentacion")
+    public String alimentacion(Model model) {
+        model.addAttribute("productos", productoServicio.buscarPorCategoria("alimentacion"));
+
+
         return "alimentacion";
     }
 
+    /*
     @GetMapping("/producto/nuevo")
     public String nuevoProducto(Model model) {
         model.addAttribute("producto", new Producto());
@@ -41,6 +44,7 @@ public class AlimentacionController {
         producto.setPropietario(usuario);
         productoServicio.insertar(producto);
         return "redirect:/app/misproductos";
-    }
+    }*/
+
 
 }

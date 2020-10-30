@@ -128,8 +128,8 @@
                 <div class="col-md-offset-2 col-md-12">
                     <div class="pull-right">
                         <span sec:authorize="hasRole('ROLE_ADMIN')">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#añadir-modal">Nuevo Producto</button>
+                                        <button type="button" class="btn btn-primary"
+                                                th:href="@{/app/producto/form}">Nuevo Producto</button>
                         </span>
                         <br>
 
@@ -137,80 +137,30 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Imagen</th>
-                            <th>Estado</th>
+                            <th>Categoria</th>
                             <th>Nombre</th>
                             <th>Precio</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="producto : ${producto}">
-                            <td><img
-                                    th:src="${not (#strings.isEmpty(categoria.imagen))} ? ${categoria.imagen} : 'http://placehold.it/48x48'"
-                                    class="img-responsive icono-categoria" alt="imagen" /></td>
-                            <!-
-                            <td th:text="${estado}"></td>
-                            <td th:text="${nombre}"></td>
-                            <td th:text="${precio}"></td>
+                        <tr th:each="producto : ${productos}">
+                            <td th:text="${producto.categoria.nombre}"></td>
+                            <td th:text="${producto.nombre}"></td>
+                            <td th:text="${producto.precio}"></td>
                             <td class="operaciones">
                                 <span sec:authorize="hasRole('ROLE_ADMIN')">
-                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                             data-target="#editar-modal">Editar</button>
+                                     <a type="button" class="btn btn-danger"
+                                        th:href="@{'/app/producto/editar/'+${producto.id}}">Editar</a>
                                 </span>
-
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#delete-modal">Borrar</button>
+                                <span sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a type="button" class="btn btn-danger"
+                                        th:href="@{'/app/producto/eliminar/'+${producto.id}}">Borrar</a>
+                                </span>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Borrar producto</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>¿Está usted seguro de borrar este producto?</p>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                        <a href="#" class="btn btn-danger">Sí</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="modal fade" id="añadir-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Añadir producto</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form th:action="@{/producto/nuevo/submit}" action="alimentacion" th:object="${producto}" method="post">
-                        <input class="text" type="text" th:field="*{estado}" name="estado" placeholder="estado" required=""> <br><br>
-                        <input class="text" type="text" th:field="*{nombre}" name="nombre" placeholder="nombre" required="">
-                        <input class="text" type="text" th:field="*{precio}" name="precio" placeholder="precio" required="">
-                        <input type="submit" value="Registrar nuevo producto">
-                        </form>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -220,6 +170,7 @@
     <!-- /.row -->
 
 </div>
+<br><br><br>
 <!-- /.container -->
 
 <!-- Footer -->

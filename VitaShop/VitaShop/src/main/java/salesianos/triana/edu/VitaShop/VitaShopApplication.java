@@ -48,7 +48,7 @@ public class VitaShopApplication {
 			servicio.save(a);
 
 			Categoria c1 = new Categoria();
-			c1.setNombre("Alimentación");
+			c1.setNombre("alimentacion");
 
 			categoriaServicio.save(c1);
 
@@ -61,63 +61,76 @@ public class VitaShopApplication {
 			p1.setNombre("Boniato");
 			p1.setPrecio(1.90);
 			p1.setEstado(true);
+			p1.setCategoria(c1);
+
 
 
 			Producto p2 = new Producto();
 			p2.setNombre("Guisantes");
 			p2.setPrecio(2.90);
 			p2.setEstado(true);
+			p2.setCategoria(c1);
 
 
 			Producto p3 = new Producto();
 			p3.setNombre("Brócoli");
 			p3.setPrecio(0.90);
 			p3.setEstado(true);
+			p3.setCategoria(c1);
 
 			Producto p4 = new Producto();
 			p4.setNombre("Espinacas");
 			p4.setPrecio(4.90);
 			p4.setEstado(true);
+			p4.setCategoria(c1);
 
 			Producto p5 = new Producto();
 			p5.setNombre("Kale");
 			p5.setPrecio(2.90);
 			p5.setEstado(true);
+			p5.setCategoria(c1);
 
 			Producto p6 = new Producto();
 			p6.setNombre("Calabacín");
 			p6.setPrecio(0.60);
 			p6.setEstado(true);
+			p6.setCategoria(c1);
 
 			Producto p7 = new Producto();
 			p7.setNombre("Remolacha");
 			p7.setPrecio(1.20);
 			p7.setEstado(true);
+			p7.setCategoria(c1);
 
 			Producto p8 = new Producto();
 			p8.setNombre("Zanahorias");
 			p8.setPrecio(2.79);
 			p8.setEstado(true);
+			p8.setCategoria(c1);
 
 			Producto p9 = new Producto();
 			p9.setNombre("Tomates");
 			p9.setPrecio(7.79);
 			p9.setEstado(true);
+			p9.setCategoria(c1);
 
 			Producto p10 = new Producto();
 			p10.setNombre("Ajo");
 			p10.setPrecio(9.10);
 			p10.setEstado(true);
+			p10.setCategoria(c1);
 
 			Producto p11 = new Producto();
 			p11.setNombre("Cebolla");
 			p11.setPrecio(4.21);
 			p11.setEstado(true);
+			p11.setCategoria(c1);
 
 			Producto p12 = new Producto();
 			p12.setNombre("Brotes de alfalfa");
 			p12.setPrecio(3.12);
 			p12.setEstado(true);
+			p12.setCategoria(c1);
 
 
 			List<Producto> listaProductos = Arrays.asList(p1,p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);

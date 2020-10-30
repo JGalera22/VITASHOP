@@ -15,7 +15,13 @@ public class CategoriaServicio extends BaseService<Categoria, Long, CategoriaRep
         super(repo);
     }
 
-    public Optional<Categoria> buscarPorNombre(String nombre) {
-        return repositorio.findFirstByNombre(nombre);
+    public Categoria buscarPorNombre(String nombre) {
+        Categoria categoria = new Categoria();
+        for (Categoria c : this.findAll()){
+            if (c.getNombre().equals(nombre)){
+                categoria = c;
+            }
+        }
+        return categoria;
     }
 }

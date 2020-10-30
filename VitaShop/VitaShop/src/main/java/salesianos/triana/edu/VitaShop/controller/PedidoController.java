@@ -68,6 +68,8 @@ public class PedidoController {
         return "app/compra/carrito";
     }
 
+
+
     @GetMapping("/carrito/add/{id}")
     public String addCarrito(Model model, @PathVariable Long id) {
         List<Long> contenido = (List<Long>) session.getAttribute("carrito");
@@ -97,7 +99,7 @@ public class PedidoController {
     public String checkout() {
         List<Long> contenido = (List<Long>) session.getAttribute("carrito");
         if (contenido == null)
-            return "redirect:/public";
+            return "redirect:/factura";
 
         List<Producto> productos = productosCarrito();
 
@@ -127,6 +129,12 @@ public class PedidoController {
         return "/app/compra/factura";
     }
 
+    /**********************************************************/
+
+    @GetMapping("/form")
+    public String verForm(Model model) {
+        return "app/producto/form";
+    }
 
 
 

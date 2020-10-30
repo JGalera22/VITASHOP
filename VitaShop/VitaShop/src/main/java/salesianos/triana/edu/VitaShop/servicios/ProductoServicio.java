@@ -1,22 +1,25 @@
 package salesianos.triana.edu.VitaShop.servicios;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import salesianos.triana.edu.VitaShop.repositorio.ProductoRepository;
+import salesianos.triana.edu.VitaShop.seguridad.modelos.Categoria;
 import salesianos.triana.edu.VitaShop.seguridad.modelos.Pedido;
 import salesianos.triana.edu.VitaShop.seguridad.modelos.Producto;
 import salesianos.triana.edu.VitaShop.seguridad.modelos.Usuario;
 import salesianos.triana.edu.VitaShop.servicios.base.BaseService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductoServicio extends BaseService<Producto, Long, ProductoRepository> {
 
+    private final CategoriaServicio categoriaServicio;
 
-    public ProductoServicio(ProductoRepository repo) {
+    public ProductoServicio(ProductoRepository repo, CategoriaServicio categoriaServicio) {
         super(repo);
+        this.categoriaServicio = categoriaServicio;
     }
 
     public Optional<Producto> buscarPorId(Long id) {
@@ -70,4 +73,21 @@ public class ProductoServicio extends BaseService<Producto, Long, ProductoReposi
     public List<Producto> variosPorId(List<Long> ids) {
         return repositorio.findAllById(ids);
     }
+
+    public List<Producto> buscarPorCategoria(String categoria){
+        List<Producto> listaFinal = new ArrayList<>();
+        Categoria c = categoriaServicio.buscarPorNombre(categoria);
+        if (categoria != null) {
+            for (Producto p : this.findAll())
+                if (p.getCategoria().equals(c)) {
+                    listaFinal.add(p);
+                }
+        }
+        return listaFinal;
+
+    }
+
+
+
+
 }

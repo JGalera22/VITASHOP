@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import salesianos.triana.edu.VitaShop.repositorio.Carrito;
 import salesianos.triana.edu.VitaShop.seguridad.modelos.Producto;
 import salesianos.triana.edu.VitaShop.seguridad.modelos.Usuario;
+import salesianos.triana.edu.VitaShop.servicios.CategoriaServicio;
 import salesianos.triana.edu.VitaShop.servicios.ProductoServicio;
 import salesianos.triana.edu.VitaShop.servicios.UsuarioServicio;
 
@@ -24,6 +25,7 @@ import java.util.List;
 public class ProductoController {
 
         private final Carrito carrito;
+
 
         @ModelAttribute("productos")
         public List<Producto> todosLosProductos() {
@@ -80,7 +82,9 @@ public class ProductoController {
             productoServicio.borrar(p);
         return "redirect:/app/misproductos";
     }
-    /*
+
+
+
     @GetMapping("/producto/nuevo")
     public String nuevoProductoForm(Model model) {
         model.addAttribute("producto", new Producto());
@@ -92,6 +96,45 @@ public class ProductoController {
         producto.setPropietario(usuario);
         productoServicio.insertar(producto);
         return "redirect:/app/misproductos";
-    }*/
+    }
+
+
+
+    @GetMapping("/producto/eliminar/{id}")
+    public String eliminarProducto(@PathVariable Long id) {
+        Producto p = productoServicio.findById(id);
+        if (p != null){
+            if (p.getCategoria().equals(categoriaServicio.buscarPorNombre("alimentacion"))){
+                productoServicio.borrar(p);
+                return "redirect:/alimentacion";
+            } else{
+                productoServicio.borrar(p);
+                return "redirect:/deportes";
+            }
+        }
+        return "redirect:/index";
+    }
+
+
+    @GetMapping("/producto/editar/{id}")
+    public String editarProductoForm(@PathVariable Long id, Model model) {
+        Producto p = productoServicio.findById(id);
+        model.addAttribute("producto", p);
+        return "app/producto/form";
+    }
+
+    @Autowired
+    CategoriaServicio categoriaServicio;
+
+    @PostMapping("/producto/editar/submit")
+    public String editarProductoSubmit(@ModelAttribute Producto p) { ;
+        if (p.getCategoria().equals(categoriaServicio.buscarPorNombre("alimentacion"))){
+            productoServicio.editar(p);
+            return "redirect:/alimentacion";
+        } else{
+            productoServicio.editar(p);
+            return "redirect:/deportes";
+        }
+    }
 
 }
