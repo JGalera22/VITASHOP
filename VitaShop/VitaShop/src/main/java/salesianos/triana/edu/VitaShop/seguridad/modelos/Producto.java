@@ -20,22 +20,32 @@ public class Producto {
     @GeneratedValue
     private Long id;
 
-    private String nombre, estado;
+    private String nombre;
+    private boolean estado;
     private double precio;
 
     @ManyToOne
     private Categoria categoria;
 
-    public Producto(String nombre, String estado, double precio) {
+    @ManyToOne
+    private Pedido pedido;
+
+    @ManyToOne
+    private Usuario propietario;
+
+    public Producto(String nombre, boolean estado, double precio) {
         this.nombre = nombre;
         this.estado = estado;
         this.precio = precio;
+
     }
 
-    public Producto(String nombre, String estado, double precio, Categoria categoria) {
+    public Producto(String nombre, boolean estado, double precio, Categoria categoria) {
         this.nombre = nombre;
         this.estado = estado;
         this.precio = precio;
         this.categoria = categoria;
     }
+
+
 }

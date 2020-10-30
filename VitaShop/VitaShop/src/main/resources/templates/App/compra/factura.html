@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Home</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../../../static/css/styles.css"
+		  th:href="@{/css/styles.css}">
+
+
+	<style>
+            /*!
+        * Start Bootstrap - Shop Homepage (https://startbootstrap.com/templates/shop-homepage)
+        * Copyright 2013-2020 Start Bootstrap
+        * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
+        */
+
+        body {
+        padding-top: 56px;
+        background: #76b852;
+        }
+
+        .navbar{
+            background-color: #15926C;
+
+        }
+        #footer {
+           position:fixed;
+           left:0px;
+           bottom:0px;
+           height:30px;
+           width:100%;
+           background:#999;
+        }
+        #cuenta{
+            background: #15926C;
+        }
+
+        .nav-link {
+          display: block;
+          padding: 0rem;
+        }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="index">VITASHOP</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="index" th:href="@{/index}">Home
+						<span class="fi-account-logout"></span>
+					</a>
+				</li>
+				<li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-user nav-link"></i><span th:text="${#authentication.getPrincipal().getNombre()}">Mi Cuenta</span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown" id="cuenta">
+						<a class="dropdown-item" href="/user/" th:href="@{/user/}">Mi Cuenta</a>
+						<span sec:authorize="hasRole('ROLE_ADMIN')">
+              <a class="dropdown-item" href="/admin/" th:href="@{/admin/}">Zona Privada</a>
+              </span>
+						<a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Salir</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="app/compra/carrito" th:href="@{/app/compra/carrito}">Carrito</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="alimentacion" th:href="@{/alimentacion}">Tienda</a>
+				</li>
+				<li sec:authorize="isAnonymous()" class="nav-item">
+					<a class="nav-link" href="/login" th:href="@{/login}">Inicio Sesión/Registro</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<br><br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6">
+				<div class="invoice-title">
+					<h2>Factura</h2>
+					<h3 class="pull-right">
+						Compra #<span th:text="${.id}">1234</span>
+					</h3>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-xs-6">
+						<address>
+							<strong>Comprado por:</strong><br> <span
+								th:text="${pedido.propietario.nombre + ' ' + pedido.propietario.apellidos}"></span><br>
+							<span th:text="${pedido.propietario.email}"></span><br>
+						</address>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<strong>Listado de productos</strong>
+						</h3>
+					</div>
+					<div class="panel-body invoice-body">
+						<div class="table-responsive">
+							<table class="table table-condensed">
+								<thead>
+									<tr>
+										<td><strong>Producto</strong></td>
+										<td class="text-right"><strong>Precio</strong></td>
+									</tr>
+								</thead>
+								<tbody>									
+									<tr th:each="producto : ${productos}">
+										<td><span th:text="${producto.nombre}">Producto</span></td>
+										<td class="text-right"><span th:text="${#numbers.formatCurrency(producto.precio)}">123€</span></td>
+									</tr>
+									<tr>
+										<td class="thick-line text-right"><strong>Total</strong></td>
+										<td class="thick-line text-right"><span
+											th:text="${#numbers.formatCurrency(total_compra)}"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+
+
+
+
+	<!-- Footer -->
+	<br><br><br><br>
+	<footer class="py-5 bg-dark" id="footer">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; VitaShop 2020</p>
+		</div>
+		<!-- /.container -->
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+			th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</body>
+</html>
