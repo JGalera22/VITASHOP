@@ -94,7 +94,7 @@
     </div>
 </nav>
 
-</nav>
+
 
 <!-- Page Content -->
 <div class="container" id="izq">
@@ -117,8 +117,8 @@
                 <div class="col-md-offset-2 col-md-12">
                     <div class="pull-right">
                         <span sec:authorize="hasRole('ROLE_ADMIN')">
-                                        <button type="button" class="btn btn-primary"
-                                                th:href="@{/app/producto/nuevo}">Nuevo Producto</button>
+                                        <a type="button" class="btn btn-primary"
+                                           th:href="@{/app/producto/nuevo}">Nuevo Producto</a>
                         </span>
                         <br>
 
@@ -128,14 +128,14 @@
                         <tr>
                             <th>Categoria</th>
                             <th>Nombre</th>
-                            <th>Precio(€)</th>
+                            <th>Precio (€)</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="producto : ${productos}">
                             <td th:text="${producto.categoria.nombre}"></td>
                             <td th:text="${producto.nombre}"></td>
-                            <td th:text="${producto.precio}">€</td>
+                            <td th:text="${producto.precio}"></td>
                             <td class="operaciones">
                                 <span sec:authorize="hasRole('ROLE_ADMIN')">
                                      <a type="button" class="btn btn-danger"
